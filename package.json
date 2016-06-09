@@ -1,8 +1,8 @@
 {
-  "name": "ohmycache",
+  "name": "OhMyCache",
   "version": "1.0.0",
-  "description": "",
-  "main": "webpack.config.js",
+  "description": "A cache lib based on LocalStorage and SessionStorage",
+  "main": "dist/bundle.js",
   "scripts": {
     "build": "node build/build.js",
     "dev": "node build/dev.js"
@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/ozee31/ohmycache.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Flavien Beninca <contact@flavienbeninca.fr>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ozee31/ohmycache/issues"
   },
