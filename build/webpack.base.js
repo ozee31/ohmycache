@@ -13,13 +13,16 @@ module.exports = {
     libraryTarget: 'umd',
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
+    alias: {
+      'src': path.resolve(__dirname, '../src')
+    }
   },
   module: {
     preLoaders: [
       {
         est: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules|bower_components|test)/,
         loader: 'eslint'
       }
     ],
