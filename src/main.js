@@ -1,3 +1,5 @@
-import chaine from './test.js'
+import OhMyLocalCache from './OhMyLocalCache.js'
+import OhMySessionCache from './OhMySessionCache.js'
 
-console.log(chaine)
+export const Local = new OhMyLocalCache()
+export const Session = new OhMySessionCache()
