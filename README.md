@@ -30,12 +30,21 @@ Download this repository and copy files on your project **(not recommended)**
 
 ### ES2015 (babel)
 ```JS
-import OhMyCache from 'OhMyCache'
+import {Local, Session} from 'OhMyCache'
+
+// quick use
+Local.set('key', 'val')
+Session.set('key', 'val')
+
 ```
 
 ### With require function of node
 ```JS
 var OhMyCache = require('OhMyCache')
+
+// quick use
+OhMyCache.Local.set('key', 'val')
+OhMyCache.Session.set('key', 'val')
 ```
 
 ### In html
