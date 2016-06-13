@@ -1,6 +1,6 @@
-import OhMyCache from 'src/OhMyLocalCache.js'
+import OhMyCache from 'src/OhMySessionCache.js'
 
-describe('OhMyLocalCache', () => {
+describe('OhMySessionCache', () => {
   var _class = new OhMyCache()
 
   afterEach(function() {
@@ -13,12 +13,12 @@ describe('OhMyLocalCache', () => {
   }
 
   describe("getEngine()", function() {
-    it('is localStorage', function() {
-      expect(_class.getEngine()).toBe(localStorage)
+    it('is sessionStorage', function() {
+      expect(_class.getEngine()).toBe(sessionStorage)
     })
 
-    it('is not sessionStorage', function() {
-      expect(_class.getEngine()).not.toBe(sessionStorage)
+    it('is not localStorage', function() {
+      expect(_class.getEngine()).not.toBe(localStorage)
     })
   })
 
@@ -30,8 +30,8 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val)
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
-      expect(null).toBe(sessionStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
+      expect(null).toBe(localStorage.getItem(key))
     })
 
     it('add a new data (array)', function() {
@@ -41,7 +41,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val)
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
 
     it('add a new data (object)', function() {
@@ -51,7 +51,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val)
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
 
     it('add a new data with expiration', function() {
@@ -62,7 +62,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val, {expire: expiration})
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
 
     it('add a new data with expiration (not int) => fail', function() {
@@ -72,7 +72,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val, {expire: expiration})
 
       expect(false).toBe(returnFn)
-      expect(null).toBe(localStorage.getItem(key))
+      expect(null).toBe(sessionStorage.getItem(key))
     })
 
     it('add a new data (readOnly)', function() {
@@ -82,7 +82,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val, {readonly: true})
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
 
     it('update a data', function() {
@@ -93,7 +93,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, val)
 
       expect(true).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
 
     it('update a data (readOnly)', function() {
@@ -106,7 +106,7 @@ describe('OhMyLocalCache', () => {
       let returnFn = _class.set(key, valUpdate)
 
       expect(false).toBe(returnFn)
-      expect(expected).toBe(localStorage.getItem(key))
+      expect(expected).toBe(sessionStorage.getItem(key))
     })
   })
 
@@ -166,7 +166,7 @@ describe('OhMyLocalCache', () => {
       let key = 'nocachejs'
       let val = 'oh no !!!'
 
-      localStorage.setItem(key, val)
+      sessionStorage.setItem(key, val)
 
       let expected = {
         0: val
@@ -195,12 +195,12 @@ describe('OhMyLocalCache', () => {
       let created = 1451602800 // 2016-01-01
       let expired = created + 3600
 
-      localStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
+      sessionStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
 
       let result = _class.getItem(key)
 
       expect(null).toBe(result)
-      expect(null).toBe(localStorage.getItem(key))
+      expect(null).toBe(sessionStorage.getItem(key))
     })
 
     it('get a data (readOnly)', function() {
@@ -250,7 +250,7 @@ describe('OhMyLocalCache', () => {
     it('get not set with cachejs', function() {
       let key = 'nocachejs'
       let val = 'oh no !!!'
-      localStorage.setItem(key, val)
+      sessionStorage.setItem(key, val)
 
       expect(val).toEqual(_class.get(key))
     })
@@ -269,10 +269,10 @@ describe('OhMyLocalCache', () => {
       let val = 'world'
       let created = 1451602800 // 2016-01-01
       let expired = created + 3600
-      localStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
+      sessionStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
 
       expect(null).toBe(_class.get(key))
-      expect(null).toBe(localStorage.getItem(key))
+      expect(null).toBe(sessionStorage.getItem(key))
     })
 
     it('get a data (readOnly)', function() {
@@ -292,9 +292,9 @@ describe('OhMyLocalCache', () => {
       let val = 'world'
       _class.set(key, val)
 
-      expect(null).not.toBe(localStorage.getItem(key))
+      expect(null).not.toBe(sessionStorage.getItem(key))
       expect(true).toBe(_class.remove(key))
-      expect(null).toBe(localStorage.getItem(key))
+      expect(null).toBe(sessionStorage.getItem(key))
       expect(null).toBe(_class.get(key))
     })
 
@@ -307,9 +307,9 @@ describe('OhMyLocalCache', () => {
       let val = 'world'
       _class.set(key, val, {readonly: true})
 
-      expect(null).not.toBe(localStorage.getItem(key))
+      expect(null).not.toBe(sessionStorage.getItem(key))
       expect(false).toBe(_class.remove(key))
-      expect(null).not.toBe(localStorage.getItem(key))
+      expect(null).not.toBe(sessionStorage.getItem(key))
       expect(null).not.toBe(_class.get(key))
     })
   })
@@ -322,7 +322,7 @@ describe('OhMyLocalCache', () => {
       let val = 'world'
       let created = 1451602800 // 2016-01-01
       let expired = created + 3600
-      localStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
+      sessionStorage.setItem(key, JSON.stringify({0:val, 1:created, 2:expired}))
 
       expect(true).toBe(_class.isExpired(key))
     })
@@ -379,15 +379,15 @@ describe('OhMyLocalCache', () => {
     it('clear', function() {
       _class.set('k1', 'v1', {readonly: true})
       _class.set('k2', 'v2')
-      sessionStorage.setItem('s1', 's2')
+      localStorage.setItem('s1', 's2')
 
       _class.clear();
 
-      expect(null).toBe(localStorage.getItem('k1'))
-      expect(null).toBe(localStorage.getItem('k2'))
+      expect(null).toBe(sessionStorage.getItem('k1'))
+      expect(null).toBe(sessionStorage.getItem('k2'))
       expect(null).toBe(_class.get('k1'))
       expect(null).toBe(_class.get('k2'))
-      expect('s2').toEqual(sessionStorage.getItem('s1'))
+      expect('s2').toEqual(localStorage.getItem('s1'))
     });
   });
 })

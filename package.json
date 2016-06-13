@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node build/build.js",
     "dev": "node build/dev.js",
-    "unit": "karma start test/karma.conf.js --single-run || true"
+    "unit": "karma start test/karma.conf.js --single-run || true",
+    "test": "karma start test/karma.conf.js --single-run || true"
   },
   "repository": {
     "type": "git",
