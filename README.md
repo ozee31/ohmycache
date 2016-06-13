@@ -15,12 +15,12 @@ Web browser with LocalStorage and SessionStorage :
 
 ### With npm
 ```bash
-npm install ohmycache
+npm install OhMyCache
 ```
 
 ### With bower
 ```bash
-bower install ohmycache
+bower install OhMyCache
 ```
 
 ### Other method
