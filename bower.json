@@ -1,0 +1,22 @@
+{
+  "name": "OhMyCache",
+  "description": "A cache lib based on LocalStorage and SessionStorage without dependencies",
+  "main": "dist/bundle.js",
+  "authors": [
+    "Flavien Beninca (ozee31) <contact@flavienbeninca.fr>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Cache",
+    "LocalStorage",
+    "SessionStorage"
+  ],
+  "homepage": "https://github.com/ozee31/ohmycache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
