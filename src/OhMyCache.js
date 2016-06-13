@@ -44,7 +44,7 @@ export default class OhMyCache {
    * @param {mixed} value : value you want to give the key you are creating/updating (string, int, array, object...)
    * @param {Object} options : {
         expire : (int) the item expires in x seconds // default = false
-        readOnly : (true) prohibit modification // default = false
+        readonly : (true) prohibit modification // default = false
    * }
    */
   set (key, value, options = {}) {
