@@ -1,6 +1,9 @@
 # OhMyCache
 OhMyCache is a javascript library that uses LocalStorage and SessionStorage for cache datas on your application without dependencies
 
+## Documentation
+[Official documentation](http://flavienbeninca.fr/ohmycache/)
+
 ## Requirements
 Web browser with LocalStorage and SessionStorage :
 - Chrome 5+
