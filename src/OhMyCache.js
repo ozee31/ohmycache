@@ -38,6 +38,18 @@ export default class OhMyCache {
     return (item) ? item[VALUE] : null
   }
 
+  getAll () {
+    let keys = this.keys()
+    let len = keys.length
+    let items = {}
+
+    for (let i = 0; i < len; i++) {
+      items[keys[i]] = this.get(keys[i])
+    }
+
+    return items
+  }
+
   /**
    * Return all item's keys
    */
