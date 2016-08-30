@@ -39,6 +39,13 @@ export default class OhMyCache {
   }
 
   /**
+   * Return all item's keys
+   */
+  keys () {
+    return Object.keys(this.getEngine())
+  }
+
+  /**
    * Add the key to the storage, or update that key's value if it already exists
    * @param {string} key
    * @param {mixed} value : value you want to give the key you are creating/updating (string, int, array, object...)

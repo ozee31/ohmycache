@@ -286,6 +286,20 @@ describe('OhMyLocalCache', () => {
 
 
 
+  describe("keys()", function() {
+    it('return all items key', function() {
+      _class.set('key1', 'val1')
+      _class.set('key2', 'val2')
+
+      let expected = ['key2', 'key1']
+      let result = _class.keys()
+
+      expect(expected).toEqual(result)
+    })
+  })
+
+
+
   describe("remove()", function() {
     it('remove', function() {
       let key = 'hello'
