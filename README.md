@@ -173,6 +173,23 @@ OhMyCache.Local.set('k3', 'v3', {expire: 1})
 OhMyCache.Local.getAll() // {k1: 'v1', k2: 'v2'}
 ```
 
+### Keys
+Return all item's keys, doen't remove expired items
+`keys()`
+
+#### Return
+**Array** : all item's keys
+
+#### Exemples
+```JS
+OhMyCache.Local.set('k1', 'v1')
+OhMyCache.Local.set('k2', 'v2', {readonly: true})
+OhMyCache.Local.set('k3', 'v3', {expire: 1})
+
+// sleep 2 secondes or more
+OhMyCache.Local.keys() // ['k1', 'k2', 'k3']
+```
+
 ### Remove
 Remove item if don't readonly
 `remove(key)`
