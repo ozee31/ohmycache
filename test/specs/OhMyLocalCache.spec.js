@@ -446,7 +446,7 @@ describe('OhMyLocalCache', () => {
 
 
   describe("clear()", function() {
-    it('clear', function() {
+    it('clear all', function() {
       _class.set('k1', 'v1', {readonly: true})
       _class.set('k2', 'v2')
       sessionStorage.setItem('s1', 's2')
@@ -458,6 +458,22 @@ describe('OhMyLocalCache', () => {
       expect(null).toBe(_class.get('k1'))
       expect(null).toBe(_class.get('k2'))
       expect('s2').toEqual(sessionStorage.getItem('s1'))
-    });
-  });
+    })
+
+    it('clear only expired', function() {
+      _class.set('k1', 'v1', {readonly: true})
+      _class.set('k2', 'v2')
+      let created = 1451602800 // 2016-01-01
+      let expired = created + 3600
+      localStorage.setItem('k3', JSON.stringify({0:'v3', 1:created, 2:expired}))
+      sessionStorage.setItem('s1', 's2')
+
+      _class.clear(true);
+
+      expect('v1').toBe(_class.get('k1'))
+      expect('v2').toBe(_class.get('k2'))
+      expect(null).toBe(_class.get('k3'))
+      expect('s2').toEqual(sessionStorage.getItem('s1'))
+    })
+  })
 })

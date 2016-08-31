@@ -148,14 +148,15 @@ export default class OhMyCache {
 
   /**
    * Remove all items
+   * @param  {string} onlyExpired: if true remove only expired datas else remove all items
    * @return {boolean}
    */
-  clear () {
-    try {
-      this.engine.clear()
+  clear (onlyExpired = false) {
+    if (onlyExpired) {
+      this.getAllItems()
       return true
-    } catch (e) {
-      return false
+    } else {
+      return _clear(this.engine)
     }
   }
 
@@ -259,6 +260,19 @@ function _isReadonly (item) {
 function _remove (engine, key) {
   try {
     engine.removeItem(key)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+/**
+ * Remove all items
+ * @return {boolean}
+ */
+function _clear (engine) {
+  try {
+    engine.clear()
     return true
   } catch (e) {
     return false
