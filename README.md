@@ -53,7 +53,7 @@ OhMyCache.Session.set('key', 'val')
 ### In html
 ```html
 <html>
-	<head>
+  <head>
         <!-- npm -->
         <script src="node_modules/ohmycache/dist/bundle.js"></script>
 
@@ -61,8 +61,8 @@ OhMyCache.Session.set('key', 'val')
         <script src="bower_components//ohmycache/dist/bundle.js"></script>
 
         <!-- other method -->
-		<script src="lib-path/ohmycache/dist/bundle.js"></script>
-	</head>
+    <script src="lib-path/ohmycache/dist/bundle.js"></script>
+  </head>
 </html>
 ```
 
@@ -156,6 +156,23 @@ OhMyCache.Local.set('key', 'value', {expire: 1})
 OhMyCache.Local.get('key') // null
 ```
 
+### GetAll
+Get all items, remove all expired items
+`getAll()`
+
+#### Return
+**Object** : all items {key: value, key2: value2...}
+
+#### Exemples
+```JS
+OhMyCache.Local.set('k1', 'v1')
+OhMyCache.Local.set('k2', 'v2', {readonly: true})
+OhMyCache.Local.set('k3', 'v3', {expire: 1})
+
+// sleep 2 secondes or more
+OhMyCache.Local.getAll() // {k1: 'v1', k2: 'v2'}
+```
+
 ### Remove
 Remove item if don't readonly
 `remove(key)`
@@ -182,10 +199,13 @@ OhMyCache.Local.get('key') // 'value'
 
 ### Clear
 Remove all items
-`clear()`
+`clear(onlyExpired)`
+
+#### Parameters
+- {boolean} **onlyExpired** : if true remove only expired items else remove all items, default false
 
 #### Return
-true
+**Boolean** : success
 
 #### Exemples
 ```JS
