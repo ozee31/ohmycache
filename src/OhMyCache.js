@@ -39,6 +39,54 @@ export default class OhMyCache {
   }
 
   /**
+   * Get all values, remove if expired
+   * @return {object}
+   */
+  getAll () {
+    let keys = this.keys()
+    let len = keys.length
+    let items = {}
+
+    for (let i = 0; i < len; i++) {
+      let val = this.get(keys[i])
+
+      if (val) {
+        items[keys[i]] = val
+      }
+    }
+
+    return items
+  }
+
+  /**
+   * Get all complete items by key with value, date, expiration and readonly options, remove if expired
+   * @return {object}
+   */
+  getAllItems () {
+    let keys = this.keys()
+    let len = keys.length
+    let items = {}
+
+    for (let i = 0; i < len; i++) {
+      let item = this.getItem(keys[i])
+
+      if (item) {
+        items[keys[i]] = item
+      }
+    }
+
+    return items
+  }
+
+  /**
+   * Return all item's keys
+   * @return {array}
+   */
+  keys () {
+    return Object.keys(this.getEngine())
+  }
+
+  /**
    * Add the key to the storage, or update that key's value if it already exists
    * @param {string} key
    * @param {mixed} value : value you want to give the key you are creating/updating (string, int, array, object...)
@@ -100,14 +148,15 @@ export default class OhMyCache {
 
   /**
    * Remove all items
+   * @param  {string} onlyExpired: if true remove only expired datas else remove all items
    * @return {boolean}
    */
-  clear () {
-    try {
-      this.engine.clear()
+  clear (onlyExpired = false) {
+    if (onlyExpired) {
+      this.getAllItems()
       return true
-    } catch (e) {
-      return false
+    } else {
+      return _clear(this.engine)
     }
   }
 
@@ -211,6 +260,19 @@ function _isReadonly (item) {
 function _remove (engine, key) {
   try {
     engine.removeItem(key)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+/**
+ * Remove all items
+ * @return {boolean}
+ */
+function _clear (engine) {
+  try {
+    engine.clear()
     return true
   } catch (e) {
     return false
