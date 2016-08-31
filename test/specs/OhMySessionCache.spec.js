@@ -314,6 +314,34 @@ describe('OhMySessionCache', () => {
 
 
 
+  describe("getAllItems()", function() {
+    it('return all items key', function() {
+      _class.set('key1', 'val1')
+      _class.set('key2', 'val2')
+
+      let expected = {key2: {0: 'val2', 1: time()}, key1: {0: 'val1', 1: time()}}
+      let result = _class.getAllItems()
+
+      expect(expected).toEqual(result)
+    })
+
+    it('no return expired item', function() {
+      _class.set('key1', 'val1')
+      _class.set('key2', 'val2')
+
+      let created = 1451602800 // 2016-01-01
+      let expired = created + 3600
+      localStorage.setItem('key3', JSON.stringify({0:'val3', 1:created, 2:expired}))
+
+      let expected = {key2: {0: 'val2', 1: time()}, key1: {0: 'val1', 1: time()}}
+      let result = _class.getAllItems()
+
+      expect(expected).toEqual(result)
+    })
+  })
+
+
+
   describe("keys()", function() {
     it('return all items key', function() {
       _class.set('key1', 'val1')

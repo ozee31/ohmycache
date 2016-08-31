@@ -38,6 +38,10 @@ export default class OhMyCache {
     return (item) ? item[VALUE] : null
   }
 
+  /**
+   * Get all values, remove if expired
+   * @return {object}
+   */
   getAll () {
     let keys = this.keys()
     let len = keys.length
@@ -47,7 +51,27 @@ export default class OhMyCache {
       let val = this.get(keys[i])
 
       if (val) {
-        items[keys[i]] = this.get(keys[i])
+        items[keys[i]] = val
+      }
+    }
+
+    return items
+  }
+
+  /**
+   * Get all complete items by key with value, date, expiration and readonly options, remove if expired
+   * @return {object}
+   */
+  getAllItems () {
+    let keys = this.keys()
+    let len = keys.length
+    let items = {}
+
+    for (let i = 0; i < len; i++) {
+      let item = this.getItem(keys[i])
+
+      if (item) {
+        items[keys[i]] = item
       }
     }
 
@@ -56,6 +80,7 @@ export default class OhMyCache {
 
   /**
    * Return all item's keys
+   * @return {array}
    */
   keys () {
     return Object.keys(this.getEngine())
