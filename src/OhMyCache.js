@@ -44,7 +44,11 @@ export default class OhMyCache {
     let items = {}
 
     for (let i = 0; i < len; i++) {
-      items[keys[i]] = this.get(keys[i])
+      let val = this.get(keys[i])
+
+      if (val) {
+        items[keys[i]] = this.get(keys[i])
+      }
     }
 
     return items
