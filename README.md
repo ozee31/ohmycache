@@ -1,4 +1,6 @@
 # OhMyCache
+[![Build Status](https://travis-ci.org/ozee31/ohmycache.svg?branch=master)](https://travis-ci.org/ozee31/ohmycache)
+
 OhMyCache is a javascript library that uses LocalStorage and SessionStorage for cache datas on your application without dependencies
 
 ## Documentation
